@@ -24,6 +24,27 @@ document.querySelector(".buttons").onclick = (event) => {
 
   const pressedButton = event.target.textContent;
 
+  appropriateFirstNumberAndSecondNumberValue(pressedButton);
+
+  verifyPressedButtonToOperationsIfTrueRenderSignOperation(pressedButton);
+
+  performingOperations(pressedButton);
+};
+
+const renderResult = (text) => {
+  output.textContent = text;
+};
+
+const verifyPressedButtonToOperationsIfTrueRenderSignOperation = (
+  pressedButton
+) => {
+  if (operations.includes(pressedButton)) {
+    signOperation = pressedButton;
+    renderResult(signOperation);
+  }
+};
+
+const appropriateFirstNumberAndSecondNumberValue = (pressedButton) => {
   if (digit.includes(pressedButton)) {
     if (secondNumber === "" && signOperation === "") {
       firstNumber += pressedButton;
@@ -38,15 +59,12 @@ document.querySelector(".buttons").onclick = (event) => {
     }
     return;
   }
+};
 
-  if (operations.includes(pressedButton)) {
-    signOperation = pressedButton;
-    renderResult(signOperation);
-    return;
-  }
-
+const performingOperations = (pressedButton) => {
   if (pressedButton === "=") {
     if (secondNumber === "") secondNumber = firstNumber;
+
     switch (signOperation) {
       case "+":
         firstNumber = sum(firstNumber, secondNumber);
@@ -68,11 +86,8 @@ document.querySelector(".buttons").onclick = (event) => {
         division(firstNumber, secondNumber);
         break;
     }
+
     finish = true;
     renderResult(firstNumber);
   }
-};
-
-const renderResult = (text) => {
-  output.textContent = text;
 };
