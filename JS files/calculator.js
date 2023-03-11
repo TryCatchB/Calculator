@@ -2,16 +2,22 @@ const renderResult = (text) => {
   output.textContent = text;
 };
 
-const verifyPressedButtonToOperationsIfTrueRenderSignOperation = (
-  pressedButton
-) => {
+const clearAll = () => {
+  firstNumber = "";
+  secondNumber = "";
+  signOperation = "";
+  finish = false;
+  renderResult(0);
+};
+
+const appropriateSignOperation = (pressedButton) => {
   if (operations.includes(pressedButton)) {
     signOperation = pressedButton;
     renderResult(signOperation);
   }
 };
 
-const appropriateFirstNumberAndSecondNumberValue = (pressedButton) => {
+const appropriateValueForFirstNumberAndSecondNumber = (pressedButton) => {
   if (digit.includes(pressedButton)) {
     if (secondNumber === "" && signOperation === "") {
       firstNumber += pressedButton;
